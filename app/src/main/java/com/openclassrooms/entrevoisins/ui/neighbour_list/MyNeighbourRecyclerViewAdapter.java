@@ -29,6 +29,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         mNeighbours = items;
     }
 
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         System.out.println("MyNeighbourRecycleViewAdapter :: onCreateViewHolder()");
@@ -57,6 +58,13 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     @Override
     public int getItemCount() {
         return mNeighbours.size();
+    }
+
+    public Neighbour getNeighbour(int position){
+        return this.mNeighbours.get(position);
+    }
+
+    public interface Listener {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
