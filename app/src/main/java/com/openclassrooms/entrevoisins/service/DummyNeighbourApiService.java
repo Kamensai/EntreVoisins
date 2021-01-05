@@ -36,4 +36,9 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     public void createNeighbour(Neighbour neighbour) {
         neighbours.add(neighbour);
     }
+
+    @Override
+    public void updateNeighbourFavorite(Neighbour neighbour) {
+        neighbours.set(neighbours.indexOf(neighbour), neighbour);
+    }
 }
