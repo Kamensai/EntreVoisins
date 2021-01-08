@@ -125,27 +125,6 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
         return profileNeighbourActivityIntent;
     }
 
-    // [Code sample – Store State in State Bundle]
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState)
-    {
-        // Store UI state to the savedInstanceState.
-        // This bundle will be passed to onCreate on next call.  EditText txtName = (EditText)findViewById(R.id.txtName);
-
-        boolean favorite = mNeighbour.getIsFavorite();
-
-        savedInstanceState.putBoolean("Favorite", favorite);
-
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        // Restore UI state from the savedInstanceState.
-        // This bundle has also been passed to onCreate.
-        boolean favorite = savedInstanceState.getBoolean("Favorite");
-    }
 
     @Override
     public void onResume() {
