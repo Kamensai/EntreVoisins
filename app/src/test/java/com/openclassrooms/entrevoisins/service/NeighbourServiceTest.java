@@ -11,8 +11,11 @@ import org.junit.runners.JUnit4;
 
 import java.util.List;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test on Neighbour service
@@ -39,5 +42,22 @@ public class NeighbourServiceTest {
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
+    }
+
+    @Test
+    public void addNeighbourWithSuccess() {
+        Neighbour neighbourAdded = new Neighbour(13,"josé","https://i.pravatar.cc/150?u=","rue du paradis","+33 45 78 95 62","Rien à dire", false);
+        service.createNeighbour(neighbourAdded);
+        assertTrue(service.getNeighbours().contains(neighbourAdded));
+    }
+
+    @Test
+    public void changeFavoriteWithSuccess() {
+        Neighbour changedFavoriteNeighbour = service.getNeighbours().get(0);
+        assertEquals(false, changedFavoriteNeighbour.getIsFavorite());
+        // changeFavoriteNeighbour.isFavorite() is initially false.
+        changedFavoriteNeighbour.setIsFavorite(true);
+        service.updateNeighbourFavorite(changedFavoriteNeighbour);
+        assertEquals(true, service.getNeighbours().get(0).getIsFavorite());
     }
 }

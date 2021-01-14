@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -61,11 +62,10 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             }
         });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.mItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e("TAG", "Position : "+position);
-                boolean favorite = neighbour.getIsFavorite();
                 // 2 - Show result in a Toast
                 Toast.makeText(context, "You clicked on neighbour : "+neighbour.getName(), Toast.LENGTH_SHORT).show();
                 //Go to profileNeighbourActivity
@@ -87,6 +87,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         public TextView mNeighbourName;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
+        @BindView(R.id.item_neighbour)
+        public View mItemView;
 
 
         public ViewHolder(View view) {

@@ -1,34 +1,24 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.tabs.TabLayout;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.List;
 
 public class ProfileNeighbourActivity extends AppCompatActivity {
 
@@ -100,11 +90,9 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
         mFavoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Boolean nei = mNeighbour.getIsFavorite();
                 mNeighbour.setIsFavorite(!mNeighbour.getIsFavorite());
-                Boolean neio = mNeighbour.getIsFavorite();
-                loadFloatingFavoriteImageButton();
                 mApiService.updateNeighbourFavorite(mNeighbour);
+                loadFloatingFavoriteImageButton();
             }
         });
         loadFloatingFavoriteImageButton();
@@ -112,6 +100,7 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
 
     public void loadFloatingFavoriteImageButton(){
         if(mNeighbour.getIsFavorite()){
+            Toast.makeText(getApplicationContext(), mNeighbour.getName()+" Is in your Favorites!", Toast.LENGTH_SHORT).show();
             mFavoriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_favorite_clicked));
         }
         else{
