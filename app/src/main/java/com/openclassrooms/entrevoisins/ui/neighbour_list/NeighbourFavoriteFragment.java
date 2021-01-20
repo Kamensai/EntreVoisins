@@ -16,13 +16,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +34,7 @@ public class NeighbourFavoriteFragment extends Fragment {
 
     /**
      * Create and return a new instance
+     *
      * @return @{@link NeighbourFavoriteFragment}
      */
     public static NeighbourFavoriteFragment newInstance() {
@@ -70,12 +66,11 @@ public class NeighbourFavoriteFragment extends Fragment {
      */
     private void initListOfFavorite() {
         mNeighbours = mApiService.getNeighbours();
-        Iterator<Neighbour> iterator = mNeighbours.iterator();
         ArrayList<Neighbour> mListFavorite = new ArrayList();
-            while (iterator.hasNext()) {
-            Neighbour neighbour = iterator.next();
+        for (int i = 0; i < mNeighbours.size(); i++) {
+            Neighbour neighbour = mNeighbours.get(i);
             if (neighbour.getIsFavorite() == true) {
-                 mListFavorite.add(neighbour);
+                mListFavorite.add(neighbour);
             }
         }
         mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mListFavorite, this.requireContext()));
@@ -85,26 +80,24 @@ public class NeighbourFavoriteFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("NeighbourFragment :: onResume()");
         initListOfFavorite();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        System.out.println("NeighbourFragment :: onStart()");
         EventBus.getDefault().register(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        System.out.println("NeighbourFragment :: onStop()");
         EventBus.getDefault().unregister(this);
     }
 
     /**
      * Fired if the user clicks on a delete button
+     *
      * @param event
      */
     @Subscribe

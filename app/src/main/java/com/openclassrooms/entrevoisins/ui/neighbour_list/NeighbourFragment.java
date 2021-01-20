@@ -2,6 +2,7 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +21,6 @@ import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -71,21 +71,18 @@ public class NeighbourFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("NeighbourFragment :: onResume()");
         initList();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        System.out.println("NeighbourFragment :: onStart()");
         EventBus.getDefault().register(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        System.out.println("NeighbourFragment :: onStop()");
         EventBus.getDefault().unregister(this);
     }
 

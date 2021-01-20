@@ -59,7 +59,7 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profil_neighbour);
         ButterKnife.bind(this);
         Intent profileNeighbourActivityIntent = getIntent();
-        mNeighbour = (Neighbour)profileNeighbourActivityIntent.getParcelableExtra(INTENT_NEIGHBOUR);
+        mNeighbour = (Neighbour) profileNeighbourActivityIntent.getParcelableExtra(INTENT_NEIGHBOUR);
 
         String neighbourName = mNeighbour.getName();
         String aboutMe = mNeighbour.getAboutMe();
@@ -98,17 +98,16 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
         loadFloatingFavoriteImageButton();
     }
 
-    public void loadFloatingFavoriteImageButton(){
-        if(mNeighbour.getIsFavorite()){
-            Toast.makeText(getApplicationContext(), mNeighbour.getName()+" Is in your Favorites!", Toast.LENGTH_SHORT).show();
+    public void loadFloatingFavoriteImageButton() {
+        if (mNeighbour.getIsFavorite()) {
+            Toast.makeText(getApplicationContext(), mNeighbour.getName() + " Is in your Favorites!", Toast.LENGTH_SHORT).show();
             mFavoriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_favorite_clicked));
-        }
-        else{
+        } else {
             mFavoriteButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_favorite_unclicked));
         }
     }
 
-    public static Intent newInstance (Context context, Neighbour neighbour) {
+    public static Intent newInstance(Context context, Neighbour neighbour) {
         Intent profileNeighbourActivityIntent = new Intent(context, ProfileNeighbourActivity.class);
         profileNeighbourActivityIntent.putExtra(INTENT_NEIGHBOUR, neighbour); // récupérer l'utilisateur sur lequel on a cliqué
         return profileNeighbourActivityIntent;
@@ -118,18 +117,15 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("Profile :: onResume()");
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        System.out.println("Profile :: onStart()");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        System.out.println("Profile :: onStop()");
     }
 }

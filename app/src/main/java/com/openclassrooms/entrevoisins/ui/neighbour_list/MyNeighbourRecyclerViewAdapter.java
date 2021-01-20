@@ -1,6 +1,5 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -30,11 +29,9 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
-    Context context;
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, Context context) {
         mNeighbours = items;
-        this.context = context;
     }
 
 
@@ -67,9 +64,9 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             public void onClick(View view) {
                 Log.e("TAG", "Position : "+position);
                 // 2 - Show result in a Toast
-                Toast.makeText(context, "You clicked on neighbour : "+neighbour.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(holder.mItemView.getContext(), "You clicked on neighbour : "+neighbour.getName(), Toast.LENGTH_SHORT).show();
                 //Go to profileNeighbourActivity
-                context.startActivity(ProfileNeighbourActivity.newInstance(context,neighbour));
+                holder.mItemView.getContext().startActivity(ProfileNeighbourActivity.newInstance(holder.mItemView.getContext(),neighbour));
             }
         });
     }

@@ -1,6 +1,8 @@
 
 package com.openclassrooms.entrevoisins.neighbour_list;
 
+import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
@@ -27,15 +29,19 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.ComponentNameMatchers.hasClassName;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParentIndex;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsNull.notNullValue;
-
 
 
 /**
@@ -48,31 +54,18 @@ public class NeighboursListTest {
     private static int ITEMS_COUNT = 12;
     private static int FAVORITE_COUNT = 0;
 
-    private ListNeighbourActivity mActivity;
-    private ProfileNeighbourActivity mProfileNeighbourActivity;
 
     @Rule
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
             new ActivityTestRule(ListNeighbourActivity.class);
 
-    @Rule
-    public IntentsTestRule<ProfileNeighbourActivity> mProfileNeighbourActivityRule = new IntentsTestRule<>(ProfileNeighbourActivity.class);
-
-    @Before
-    public void setUp() {
-        mActivity = mActivityRule.getActivity();
-        assertThat(mActivity, notNullValue());
-        mProfileNeighbourActivity = mProfileNeighbourActivityRule.getActivity();
-        assertThat(mProfileNeighbourActivity,notNullValue());
-    }
-
     /**
-     * We ensure that our recyclerview is displaying at least on item
+     * We ensure that our recyclerview is displaying at least one item
      */
     @Test
     public void myNeighboursList_shouldNotBeEmpty() {
         // First scroll to the position that needs to be matched and click on it.
-        onView(withId(R.id.list_neighbours))
+        onView(allOf(withId(R.id.list_neighbours), withParentIndex(0)))
                 .check(matches(hasMinimumChildCount(1)));
     }
 
@@ -82,29 +75,28 @@ public class NeighboursListTest {
     @Test
     public void myNeighboursList_deleteAction_shouldRemoveItem() {
         // Given : We remove the element at position 2
-        onView(withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT));
+        onView(allOf(withId(R.id.list_neighbours), withParentIndex(0))).check(withItemCount(ITEMS_COUNT));
         // When perform a click on a delete icon
-        onView(withId(R.id.list_neighbours))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
+        onView(allOf(withId(R.id.list_neighbours), withParentIndex(0))).perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of element is 11
-        onView(withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT-1));
+        onView(allOf(withId(R.id.list_neighbours), withParentIndex(0))).check(withItemCount(ITEMS_COUNT - 1));
     }
 
     /**
      * When we click on an item, its details is launched in ProfileNeighbourActivity
      */
     @Test
-    public void clickOnNeighbourToProfile () {
-        onView(withId(R.id.list_neighbours))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new ProfileActivityViewAction()));
+    public void clickOnNeighbourToProfile() {
         Intents.init();
-        intended(hasComponent(ProfileNeighbourActivity.class.getSimpleName()));
+        onView(allOf(withId(R.id.list_neighbours), withParentIndex(0)))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new ProfileActivityViewAction()));
+        intended(hasComponent(ProfileNeighbourActivity.class.getName()));
     }
 
     @Test
-    public void neighbourNameIsNotEmpty () {
+    public void neighbourNameIsNotEmpty() {
         String neighbourName = "Caroline";
-        onView(withId(R.id.list_neighbours))
+        onView(allOf(withId(R.id.list_neighbours), withParentIndex(0)))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, new ProfileActivityViewAction()));
         onView(withId(R.id.neighbour_name)).check(matches(withText(neighbourName)));
     }
@@ -112,17 +104,26 @@ public class NeighboursListTest {
     @Test
     public void showOnlyFavorites() {
         // Clique sur l'onglet Favoris
-        onView(withId(R.id.main_content)).perform(new ClickOnTabFavorites());
-        // Liste de Favoris vide
-        onView(withId(R.id.list_neighbours)).check(withItemCount(FAVORITE_COUNT));
-        // Ajouter un Favoris à partir de l'écran profile activity
-        onView(withId(R.id.list_neighbours))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new ProfileActivityViewAction()));
-        onView(withId(R.id.layout_profile_neighbour)).perform(new ClickOnFavoriteButton());
-        //On retourne sur le main_content avec l'onglet Favoris
-        onView(withId(R.id.main_content)).perform(new ClickOnTabFavorites());
-        // Liste de Favoris avec 1 favoris
-        onView(withId(R.id.list_neighbours)).check(withItemCount(FAVORITE_COUNT+1));
-    }
+        onView(allOf(withText("Favorites"))).perform(ViewActions.click());
 
+        // Liste de Favoris vide
+        onView(allOf(withId(R.id.list_neighbours), withParentIndex(1))).check(withItemCount(FAVORITE_COUNT));
+
+        // Clique sur l'onglet Mes voisins
+        onView(allOf(withText("My neighbours"))).perform(ViewActions.click());
+
+        // Ajouter un Favoris à partir de l'écran profile activity
+        onView(allOf(withId(R.id.list_neighbours), withParentIndex(0)))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new ProfileActivityViewAction()));
+        onView(withId(R.id.favorite_ActionButton)).perform(ViewActions.click());
+
+        // On revient sur l'écran précédent
+        onView(isRoot()).perform(ViewActions.pressBack());
+
+        //On retourne sur le main_content avec l'onglet Favoris
+        onView(allOf(withText("Favorites"))).perform(ViewActions.click());
+
+        // Liste de Favoris avec 1 favoris
+        onView(allOf(withId(R.id.list_neighbours), withParentIndex(1))).check(withItemCount(FAVORITE_COUNT + 1));
+    }
 }
