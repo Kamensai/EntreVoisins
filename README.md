@@ -25,7 +25,7 @@ qu'ils puissent sse rendre des petits services au besoin : garde d'animaux, bric
     targetSdkVersion 28
  Il sera possible d'accéder à une version plus récente du SdkVersion(30) prochainement.
 
- * Les API utilisés :
+ *  Application testée sur les smartphones et tablettes sous la version des API ci-dessous:
     API 25
     API 26
     API 30
@@ -64,9 +64,6 @@ qu'ils puissent sse rendre des petits services au besoin : garde d'animaux, bric
      androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0'
      androidTestImplementation 'androidx.test:runner:1.1.0'
      androidTestImplementation "org.mockito:mockito-core:2.+"
-
-  ## Licence
-  ***
 
   ## Etat du projet
   ***
