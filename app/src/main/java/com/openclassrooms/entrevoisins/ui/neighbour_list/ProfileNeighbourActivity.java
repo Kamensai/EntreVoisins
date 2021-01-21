@@ -109,7 +109,7 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
 
     public static Intent newInstance(Context context, Neighbour neighbour) {
         Intent profileNeighbourActivityIntent = new Intent(context, ProfileNeighbourActivity.class);
-        profileNeighbourActivityIntent.putExtra(INTENT_NEIGHBOUR, neighbour); // récupérer l'utilisateur sur lequel on a cliqué
+        profileNeighbourActivityIntent.putExtra(INTENT_NEIGHBOUR, neighbour); // récupérer l'utilisateur sur lequel on a cliqué grâce à une clé
         return profileNeighbourActivityIntent;
     }
 

@@ -1,6 +1,5 @@
 package com.openclassrooms.entrevoisins.utils;
 
-import android.content.ClipData;
 import android.view.View;
 
 import com.openclassrooms.entrevoisins.R;

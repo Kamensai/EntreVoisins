@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class NeighbourFavoriteFragment extends Fragment {
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
 
 
@@ -51,7 +50,6 @@ public class NeighbourFavoriteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        System.out.println("NeighbourFragment :: onCreate()");
         View view = inflater.inflate(R.layout.fragment_neighbour_list, container, false);
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
@@ -65,15 +63,15 @@ public class NeighbourFavoriteFragment extends Fragment {
      * Init the List of favorite neighbours
      */
     private void initListOfFavorite() {
-        mNeighbours = mApiService.getNeighbours();
-        ArrayList<Neighbour> mListFavorite = new ArrayList();
+        List<Neighbour> mNeighbours = mApiService.getNeighbours();
+        List<Neighbour> mListFavorite = new ArrayList<>();
         for (int i = 0; i < mNeighbours.size(); i++) {
             Neighbour neighbour = mNeighbours.get(i);
-            if (neighbour.getIsFavorite() == true) {
+            if (neighbour.getIsFavorite()) {
                 mListFavorite.add(neighbour);
             }
         }
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mListFavorite, this.requireContext()));
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mListFavorite));
     }
 
 

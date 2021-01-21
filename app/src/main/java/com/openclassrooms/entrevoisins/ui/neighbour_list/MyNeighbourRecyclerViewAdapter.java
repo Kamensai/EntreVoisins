@@ -2,7 +2,6 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,14 +29,13 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     private final List<Neighbour> mNeighbours;
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, Context context) {
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
         mNeighbours = items;
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        System.out.println("MyNeighbourRecycleViewAdapter :: onCreateViewHolder()");
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_neighbour, parent, false);
         return new ViewHolder(view);

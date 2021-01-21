@@ -44,7 +44,6 @@ public class AddNeighbourActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("AddNeighbourActivity ::onCreate()");
         setContentView(R.layout.activity_add_neighbour);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

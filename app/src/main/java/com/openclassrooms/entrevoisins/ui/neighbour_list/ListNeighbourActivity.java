@@ -29,7 +29,6 @@ public class ListNeighbourActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("ListNeighbourActivity ::onCreate()");
         setContentView(R.layout.activity_list_neighbour);
         ButterKnife.bind(this);
 

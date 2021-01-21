@@ -11,8 +11,6 @@ import org.junit.runners.JUnit4;
 
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -54,10 +52,10 @@ public class NeighbourServiceTest {
     @Test
     public void changeFavoriteWithSuccess() {
         Neighbour changedFavoriteNeighbour = service.getNeighbours().get(0);
-        assertEquals(false, changedFavoriteNeighbour.getIsFavorite());
+        assertFalse(changedFavoriteNeighbour.getIsFavorite());
         // changeFavoriteNeighbour.isFavorite() is initially false.
         changedFavoriteNeighbour.setIsFavorite(true);
         service.updateNeighbourFavorite(changedFavoriteNeighbour);
-        assertEquals(true, service.getNeighbours().get(0).getIsFavorite());
+        assertTrue(service.getNeighbours().get(0).getIsFavorite());
     }
 }
