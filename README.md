@@ -41,16 +41,16 @@ qu'ils puissent sse rendre des petits services au besoin : garde d'animaux, bric
      implementation 'com.jakewharton:butterknife:10.0.0'  
      annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'  
 
-<<<<<<< HEAD
+
      implementation 'com.jakewharton:butterknife:9.0.0'
      implementation 'androidx.cardview:cardview:1.0.0'
      annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
-=======
+
 
      implementation 'com.jakewharton:butterknife:9.0.0'  
      implementation 'androidx.cardview:cardview:1.0.0'  
      annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'  
->>>>>>> 3a6fd37588426bdf4d9822c95145c4ab0209f59c
+
 
      implementation 'com.github.bumptech.glide:glide:4.9.0'  
      annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'  
