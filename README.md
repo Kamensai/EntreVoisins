@@ -42,11 +42,6 @@ qu'ils puissent sse rendre des petits services au besoin : garde d'animaux, bric
      annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'  
 
 
-     implementation 'com.jakewharton:butterknife:9.0.0'
-     implementation 'androidx.cardview:cardview:1.0.0'
-     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
-
-
      implementation 'com.jakewharton:butterknife:9.0.0'  
      implementation 'androidx.cardview:cardview:1.0.0'  
      annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'  
