@@ -1,6 +1,8 @@
 
 package com.openclassrooms.entrevoisins.neighbour_list;
 
+import android.view.View;
+
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.intent.Intents;
@@ -13,6 +15,7 @@ import com.openclassrooms.entrevoisins.ui.neighbour_list.ProfileNeighbourActivit
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 import com.openclassrooms.entrevoisins.utils.ProfileActivityViewAction;
 
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,13 +40,13 @@ import static org.hamcrest.Matchers.allOf;
 public class NeighboursListTest {
 
     // This is fixed
-    private static int ITEMS_COUNT = 12;
-    private static int FAVORITE_COUNT = 0;
+    private static final int ITEMS_COUNT = 12;
+    private static final int FAVORITE_COUNT = 0;
 
 
     @Rule
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
-            new ActivityTestRule(ListNeighbourActivity.class);
+            new ActivityTestRule<>(ListNeighbourActivity.class);
 
     /**
      * We ensure that our recyclerview is displaying at least one item

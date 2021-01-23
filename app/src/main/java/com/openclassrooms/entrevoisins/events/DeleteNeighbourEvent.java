@@ -10,13 +10,13 @@ public class DeleteNeighbourEvent {
     /**
      * Neighbour to delete
      */
-    public Neighbour neighbour;
+    public final Neighbour neighbour;
 
     /**
      * Constructor.
      * @param neighbour
      */
-    public DeleteNeighbourEvent(Neighbour neighbour) {
+    public DeleteNeighbourEvent(final Neighbour neighbour) {
         this.neighbour = neighbour;
     }
 }

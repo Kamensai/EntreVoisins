@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -35,6 +36,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
 
     @Override
+    @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_neighbour, parent, false);
@@ -50,22 +52,14 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
-            }
-        });
+        holder.mDeleteButton.setOnClickListener(v -> EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour)));
 
-        holder.mItemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e("TAG", "Position : "+position);
-                // 2 - Show result in a Toast
-                Toast.makeText(holder.mItemView.getContext(), "You clicked on neighbour : "+neighbour.getName(), Toast.LENGTH_SHORT).show();
-                //Go to profileNeighbourActivity
-                holder.mItemView.getContext().startActivity(ProfileNeighbourActivity.newInstance(holder.mItemView.getContext(),neighbour));
-            }
+        holder.mItemView.setOnClickListener(view -> {
+            Log.e("TAG", "Position : "+position);
+            // 2 - Show result in a Toast
+            Toast.makeText(holder.mItemView.getContext(), "You clicked on neighbour : "+neighbour.getName(), Toast.LENGTH_SHORT).show();
+            //Go to profileNeighbourActivity
+            holder.mItemView.getContext().startActivity(ProfileNeighbourActivity.newInstance(holder.mItemView.getContext(),neighbour));
         });
     }
 

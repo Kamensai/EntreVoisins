@@ -80,20 +80,12 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
                 .load(mNeighbour.getAvatarUrl())
                 .into(mNeighbourImage);
 
-        mBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        mBackButton.setOnClickListener(view -> finish());
 
-        mFavoriteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mNeighbour.setIsFavorite(!mNeighbour.getIsFavorite());
-                mApiService.updateNeighbourFavorite(mNeighbour);
-                loadFloatingFavoriteImageButton();
-            }
+        mFavoriteButton.setOnClickListener(view -> {
+            mNeighbour.setIsFavorite(!mNeighbour.getIsFavorite());
+            mApiService.updateNeighbourFavorite(mNeighbour);
+            loadFloatingFavoriteImageButton();
         });
         loadFloatingFavoriteImageButton();
     }
